@@ -3,26 +3,25 @@
 
 
 
+// // <!-- Trigger/Open The Modal -->
+// <button id="myBtn">Open Modal</button>
+
+// <!-- The Modal -->
+// <div id="myModal" class="modal">
+
+//   <!-- Modal content -->
+//   <div class="modal-content">
+//     <span class="close">&times;</span>
+    
+//   </div>
+
+// </div>
 
 
 
 
 
 
-//   function calcRoute() {
-//     var start = document.getElementById('start').value;
-//     var end = document.getElementById('end').value;
-//     var request = {
-//       origin: start,
-//       destination: end,
-//       travelMode: 'BICYCLING'
-//     };
-//     directionsService.route(request, function(result, status) {
-//       if (status == 'OK') {
-//         directionsRenderer.setDirections(result);
-//       }
-//     });
-//   }
 
 function initMap() {
     //var directionsService = new google.maps.DirectionsService();
@@ -40,6 +39,37 @@ function initMap() {
     bikeLayer.setMap(map);
 }
 
+function calcRoute() {
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var request = {
+    origin: start,
+    destination: end,
+    travelMode: 'BICYCLING'
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(result);
+    }
+  });
+}
+
+function openModal() {
+  document.querySelector(".modal").setAttribute("class", "modal is-active")
+}
+
+function closeModal() {
+  document.querySelector(".modal").setAttribute("class", "modal")
+}
+
+function performStuff() {
+  console.log("context for position")
+  closeModal()
+}
+
+document.getElementById("openModal").addEventListener("click", openModal)
+document.getElementById("no-btn").addEventListener("click", closeModal)
+document.getElementById("yes-btn").addEventListener("click", performStuff)
 // function createPhotoMarker(place) {
 //     var photos = place.photos;
 //     if (!photos) {
