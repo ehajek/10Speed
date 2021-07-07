@@ -29,6 +29,7 @@ function initMap() {
         Humidity.innerHTML = "Humidity: " + data.current.humidity + " %"
         Temperature.innerHTML = "Temp: " + data.current.temp + " ℉"
         var setImg = document.getElementById("icon")
+        setImg.style.display = "initial"
         setImg.setAttribute("src", "https://openweathermap.org/img/w/" +  data.current.weather[0].icon + ".png")  
         console.log(data)
 
@@ -50,12 +51,15 @@ function initMap() {
            
         
         console.log(data)
+        
+        ///show.style.display = "initial"
         const card = document.getElementsByClassName('card')[i];
         const dt  = document.getElementsByClassName('date')[i];
         const Icn = document.getElementsByClassName('icon')[i];
         const Tmp = document.getElementsByClassName('Temperature')[i];
         const Wnd = document.getElementsByClassName('windSpeed')[i];
         const Hum = document.getElementsByClassName('Humidity')[i];
+        
         console.log(dt)
         var d = moment() .format('LT')
         
@@ -69,7 +73,9 @@ function initMap() {
         //d = da + d[2]
             console.log(x);
         
-
+            var str = "ic" + x
+        var show = document.getElementById(str);
+        show.style.display = "initial"
         Icn.setAttribute("src", "https://openweathermap.org/img/w/" +  data.hourly[i].weather[0].icon + ".png")
         dt.innerHTML =  d
         Tmp.innerHTML = "Temp: " + data.hourly[i].temp + " ℉"; 

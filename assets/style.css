@@ -2,7 +2,21 @@
     background-color: rgb(185, 224, 196)
 }
 
+#icon {
+    display: none
+}
 
+#ic1 {
+    display: none;
+}
+
+#ic2 {
+    display: none;
+}
+
+#ic3 {
+    display: none;
+}
 
 #map {
     height: 1000px;
@@ -13,6 +27,7 @@
     display: block;
     margin-right: auto;
     margin-left: auto;
+    
 }
 
 #curr {
