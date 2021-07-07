@@ -15,7 +15,7 @@ function initMap() {
         var positionInfo = "(" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
         console.log(positionInfo);
 
-        //weather widget
+// start weather widget ------------------------------------------------------------------------------------------------------------------------------
         var apiKey = "c81ae0be75f519c71d1f855b95d48ec3"
         var uvApi = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&units=imperial&appid=" + apiKey;
         fetch(uvApi).then(response => {
@@ -93,6 +93,8 @@ function initMap() {
     })
         
     }
+    // end weather widget --------------------------------------------------------------------------------------------------------------------------
+
       });
     } 
   }
