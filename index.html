@@ -36,7 +36,7 @@
         
       </h2>
       
-      <div class="modal">
+      <!-- <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -49,27 +49,77 @@
             </button>
           </header>
         </div>
-      </div>
+      </div> -->
       
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Weather Forecast</h1>
-      <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
-      </h2>
+      <div class="columns">
+
+        <div class="column is-full">
+            <div id = "curr">
+                <h2 id="CurrentConditions"></h2>
+                <img id="icon" src="" alt="weather icon"/>
+                <div id="Temperature"></div>
+                <div id="windSpeed"></div>
+                <div id="Humidity"></div>
+                <div id="uvIndex"></div>
+            </div>
+        </div>
+      </div>
+    <div class="columns">
+      
+        <div class="column is-one-third">
+          <div class="card" id="day">
+              <h5 class="date"></h5>
+              <img id="ic1" class="icon" src="" alt="weather icon"/>
+              <div class="Temperature"></div>
+              <div class="windSpeed"></div>
+              <div class="Humidity"></div>
+          </div>
+        </div>
+
+    <div class="column is-one-third">
+        <div class="card" id="day">
+            <h5 class="date"></h5>
+            <img id="ic2" class="icon" src="" alt="weather icon"/>
+            <div class="Temperature"></div>
+            <div class="windSpeed"></div>
+            <div class="Humidity"></div>
+        </div>
+    </div>
+
+    <div class="column is-one-third">
+        <div class="card" id="day">
+            <h5 class="date"></h5>
+            <img id="ic3" class="icon" src="" alt="weather icon"/>
+            <div class="Temperature"></div>
+            <div class="windSpeed"></div>
+            <div class="Humidity"></div>
+        </div>
+      
+    </div>
+
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Mini-Map</h1>
       <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
+        Select a location on the map to pin your destination.  When selecting, aim for a street or bicycle path (highlited in <span style="color: purple;"> purple</span>) for the best resultes.  
       </h2>
       <div id="map"></div>
-      <!-- <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly"
-        async
-      ></script> -->
+      <div id="turns"></div>
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Directions
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content has-text-link" id="turnByTurn">
+          </div>
+        </div>
+      <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly" async></script>
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Instructions</h1>
