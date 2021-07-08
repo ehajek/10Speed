@@ -18,8 +18,6 @@ function get_location() {
 function show_Location(position) {
   latitude = position.coords.latitude;
 	longitude = position.coords.longitude;
-  console.log(latitude);
-  console.log(longitude);
 };
 console.log(latitude);
 console.log(longitude);
@@ -47,6 +45,7 @@ function markerLocation(mapMaker){
   var directionsRenderer = new google.maps.DirectionsRenderer({ map: mapMaker });
   console.log(latitude);
   console.log(longitude);
+  weatherMaker();
   originLocation = { lat: latitude, lng: longitude };
   directionsService.route({
     origin: originLocation,
@@ -75,79 +74,75 @@ function markerLocation(mapMaker){
       }
       turnByTurnSteps (Response.routes[0].legs[0].steps);
   })};
+
+  //Weather Start
+  function weatherMaker(){
   var apiKey = "c81ae0be75f519c71d1f855b95d48ec3"
-  var uvApi = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&units=imperial&appid=" + apiKey;
-  fetch(uvApi).then(response => {
+  var uvApi = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=" + apiKey;
+  fetch(uvApi)
+  .then(response => {
+    return response.json()})
+    .then(data => {
+      console.log(data) 
+//current conditions 
+      CurrentConditions.innerHTML = "<strong>Currently</strong>"
+      uvIndex.innerHTML = "UV Index: " + data.current.uvi
+      windSpeed.innerHTML = "Wind: " + data.current.wind_speed + " MPH"
+      Humidity.innerHTML = "Humidity: " + data.current.humidity + " %"
+      Temperature.innerHTML = "Temp: " + data.current.temp + " ℉"
+      var setImg = document.getElementById("icon")
+      setImg.style.display = "initial"
+      setImg.setAttribute("src", "https://openweathermap.org/img/w/" +  data.current.weather[0].icon + ".png")  
+      console.log(data)
+    })
+    setConditions()
+    function setConditions() {
+    fetch(uvApi).then(response => {
       return response.json()
-}).then(data => {
-  console.log(data) 
-  //current conditions 
-  CurrentConditions.innerHTML = "<strong>Currently</strong>"
-  uvIndex.innerHTML = "UV Index: " + data.current.uvi
-  windSpeed.innerHTML = "Wind: " + data.current.wind_speed + " MPH"
-  Humidity.innerHTML = "Humidity: " + data.current.humidity + " %"
-  Temperature.innerHTML = "Temp: " + data.current.temp + " ℉"
-  var setImg = document.getElementById("icon")
-  setImg.style.display = "initial"
-  setImg.setAttribute("src", "https://openweathermap.org/img/w/" +  data.current.weather[0].icon + ".png")  
-  console.log(data)
-
-  
-})
-
-
-setConditions()
-function setConditions() {
-  fetch(uvApi).then(response => {
-      return response.json()
-}).then(data => {
-  console.log(data)
-
-  for(i = 0; i < 3; i++) {
-      
+    }).then(data => {
+      console.log(data)
+      for(i = 0; i < 3; i++) {
       //console.log(card)  
       let x = 1 + i;
-     
+      console.log(data)
   
-  console.log(data)
+      ///show.style.display = "initial"
+      const card = document.getElementsByClassName('card')[i];
+      const dt  = document.getElementsByClassName('date')[i];
+      const Icn = document.getElementsByClassName('icon')[i];
+      const Tmp = document.getElementsByClassName('Temperature')[i];
+      const Wnd = document.getElementsByClassName('windSpeed')[i];
+      const Hum = document.getElementsByClassName('Humidity')[i];
+      
+      console.log(dt)
+      var d = moment() .format('LT')
+      
   
-  ///show.style.display = "initial"
-  const card = document.getElementsByClassName('card')[i];
-  const dt  = document.getElementsByClassName('date')[i];
-  const Icn = document.getElementsByClassName('icon')[i];
-  const Tmp = document.getElementsByClassName('Temperature')[i];
-  const Wnd = document.getElementsByClassName('windSpeed')[i];
-  const Hum = document.getElementsByClassName('Humidity')[i];
-  
-  console.log(dt)
-  var d = moment() .format('LT')
-  
-  
-  d = d.split(":")
-  dd = d[1].split(" ")
-  ddd = Number(d[0]) + x
-     
-  var da = ddd  + " " + dd[1]
-  d = da
-  //d = da + d[2]
-      console.log(x);
-  
-      var str = "ic" + x
-  var show = document.getElementById(str);
-  show.style.display = "initial"
-  Icn.setAttribute("src", "https://openweathermap.org/img/w/" +  data.hourly[i].weather[0].icon + ".png")
-  dt.innerHTML =  d
-  Tmp.innerHTML = "Temp: " + data.hourly[i].temp + " ℉"; 
-  Wnd.innerHTML = "Wind: " + data.hourly[i].wind_speed + " MPH"
-  Hum.innerHTML = "Humidity: " + data.hourly[i].humidity + " %"
+      d = d.split(":")
+      dd = d[1].split(" ")
+      ddd = Number(d[0]) + x
+        
+      var da = ddd  + " " + dd[1]
+      d = da
+      //d = da + d[2]
+          console.log(x);
+      
+          var str = "ic" + x
+      var show = document.getElementById(str);
+      show.style.display = "initial"
+      Icn.setAttribute("src", "https://openweathermap.org/img/w/" +  data.hourly[i].weather[0].icon + ".png")
+      dt.innerHTML =  d
+      Tmp.innerHTML = "Temp: " + data.hourly[i].temp + " ℉"; 
+      Wnd.innerHTML = "Wind: " + data.hourly[i].wind_speed + " MPH"
+      Hum.innerHTML = "Humidity: " + data.hourly[i].humidity + " %"
 
   //console.log(Tmp)
-  card.appendChild(dt)
-  card.appendChild(Wnd)
-  card.appendChild(Tmp)
-  card.appendChild(Hum)
-  
-  }
+      card.appendChild(dt)
+      card.appendChild(Wnd)
+      card.appendChild(Tmp)
+      card.appendChild(Hum)
+      
+      }
 
 })
   
@@ -156,4 +151,4 @@ function setConditions() {
   //document.getElementById('startlng').value = originLocation.lng;
   //document.getElementById('lat').value = clickedLocation.lat;
   //document.getElementById('lng').value = clickedLocation.lng;
-
+  }
