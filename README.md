@@ -17,10 +17,10 @@ The web application url for 10Speed is "https://ehajek.github.io/10Speed/".
 The name of the 10Speed GitHub repository is "10Speed" at the URL of "https://github.com/ehajek/10Speed.git". 
 
 --- 
-###Team 10Speed
-Imani Jo
-Kevin Myers
-Eddie Hajek
-Taylor Black 
+Team 10Speed <br>
+Imani Jo <br>
+Kevin Myers <br>
+Eddie Hajek <br>
+Taylor Black <br>
 
 2021.07.08
