@@ -1,70 +1,63 @@
 .hero {
     background-color: rgb(185, 224, 196)
-}
-
-
-
-#map {
-    height: 1000px;
+  }
+  
+  #map {
+      height: 400px;
+      width: 100%;
+      
+    }
+  #turn {
+    height: 100px;
     width: 100%;
-}
-
-#getLocation {
+  }
+  
+  
+  #getLocation {
     display: block;
     margin-right: auto;
     margin-left: auto;
-}
-
-.hero {
+  }
+  
+  .hero {
     background-color: rgb(185, 224, 196)
-}
-
-#icon {
+  }
+  
+  #icon {
     display: none
-}
-
-#ic1 {
+  }
+  
+  #ic1 {
     display: none;
-}
-
-#ic2 {
+  }
+  
+  #ic2 {
     display: none;
-}
-
-#ic3 {
+  }
+  
+  #ic3 {
     display: none;
-}
-
-#map {
-    height: 1000px;
-    width: 100%;
-}
-
-#getLocation {
+  }
+  
+  #getLocation {
     display: block;
     margin-right: auto;
     margin-left: auto;
     
-}
-
-#curr {
+  }
+  
+  #curr {
     padding: 25px;
     font-size: 25px;
     text-align: center;
     
-}
-
-#day {
+  }
+  
+  #day {
     padding: 25px;
     
     text-align: center;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
   }
-#turn {
-  height: 100px;
-  width: 100%;
-}
+  #cityName {
+    text-align: center;
+  }

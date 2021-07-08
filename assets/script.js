@@ -1,4 +1,5 @@
-
+// var apiKey = "&key=c2d05212cd974b798978ccf3741928b4"
+// var urlAPI = "https://api.opencagedata.com/geocode/v1/json?q="
 // function initMap() {
 //   var peninsula = new google.maps.LatLng(41.237, -81.553);
 //   const map = new google.maps.Map(document.getElementById("map"), {
@@ -15,21 +16,21 @@
 
 
 
-function showPosition() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var positionInfo = "(" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
-      console.log(positionInfo);
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
+// function showPosition() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var positionInfo = "(" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+//       console.log(positionInfo);
+//       console.log(position.coords.latitude);
+//       console.log(position.coords.longitude);
 
 
-    });
-  }
+//     });
+//   }
   
-}
+// }
 
-document.getElementById("getLocation").addEventListener("click", showPosition)
+// document.getElementById("getLocation").addEventListener("click", showPosition)
 // function openModal() {
 //   document.querySelector(".modal").setAttribute("class", "modal is-active")
 // }
@@ -59,85 +60,126 @@ var latCords = 41.237
 var lngCords = -81.553
 var marker = false;
 var originLocation = { lat: latCords, lng: lngCords };
+var latitude = "";
+var longitude = "";
+function supports_geolocation() {
+  return !!navigator.geolocation;
+}
+function get_location() {
+  if ( supports_geolocation() ) {
+    navigator.geolocation.getCurrentPosition(show_Location, handle_error);
+  } else {
+    // no native support;
+	$("#msg").text('Your browser doesn\'t support geolocation!');
+  }
+}
+function show_Location(position) {
+  latitude = position.coords.latitude;
+	longitude = position.coords.longitude;
+};
+console.log(latitude);
+console.log(longitude);
+
+function handle_error(err) {
+  if (err.code == 1) {
+    // user said no!
+	$("#msg").text('You chose not to share your location.');
+  }
+}
+get_location();
 function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("map"), {
     center: originLocation,
     zoom: 14,
     mapId: 'f195a7ab0618472c'
   });
   google.maps.event.addListener(map, 'click', function(event) {
+    // const panorama = new google.maps.StreetViewPanorama(
+    //   document.getElementById("pano"),
+    //   {
+    //     position: event.latLng,
+    //     pov: {
+    //       heading: 34,
+    //       pitch: 10,
+    //     },
+    //   }
+    // );
+    // map.setStreetView(panorama);
     clickedLocation = event.latLng;
-    function showPosition() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var positionInfo = "(" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
-          console.log(positionInfo);
-          // console.log(position.coords.latitude);
-          // console.log(position.coords.longitude);
-          let latCords = position.coords.latitude
-          let lngCords = position.coords.longitude
-          let originLocation = { lat: latCords, lng: lngCords };
-        });
-      }
-      
-    }
     markerLocation(map);
+    
   });
+  
 }
 function markerLocation(mapMaker){
-  var selectedLocation = clickedLocation;
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer({ map: mapMaker });
-  directionsRenderer.setMap(mapMaker);
+  console.log(latitude);
+  console.log(longitude);
+  weatherMaker();
+  originLocation = { lat: latitude, lng: longitude };
   directionsService.route({
     origin: originLocation,
     destination: clickedLocation,
     travelMode: google.maps.TravelMode.BICYCLING,
-  }).then(function(Response){
-    directionsRenderer.setDirections(Response)
-  });
-  document.getElementById('startlat').value = originLocation.lat;
-  document.getElementById('startlng').value = originLocation.lng;
-  document.getElementById('lat').value = selectedLocation.lat;
-  document.getElementById('lng').value = selectedLocation.lng;
-}
+  },(response, status) => {
+    console.log(response);
+    console.log(status);}
+  ).then(function(Response){
+    directionsRenderer.setDirections(Response);
+    var turnsContainer = document.getElementById("turns");
+    var turnsEL = document.createElement('p');
+    var tripDistance = Response.routes[0].legs[0].distance.text;
+    var tripDuration = Response.routes[0].legs[0].duration.text;
+    console.log(tripDistance);
+    turnsContainer.innerHTML = "Distance: " + tripDistance + "<br/>" + "Duration: " +  tripDuration;
+    turnsContainer.appendChild(turnsEL);
+    steps = Response.routes[0].legs[0].steps;
+    function turnByTurnSteps (steps) {
+      var directions = document.getElementById('turnByTurn');
+      directions.innerHTML = '';
+      for (var i = 0; i < steps.length; i++) {
+        console.log(steps[i].instructions);
+        directions.innerHTML += '<br/><br/>' + steps[i].instructions + '<br/>' + steps[i].distance.text;
+        }
+      }
+      turnByTurnSteps (Response.routes[0].legs[0].steps);
 
+  })
+  
+//  function yourCity(){
+//   var locateContainer = document.getElementById("getLocation").addEventListener("click");
+//    var location = Response.routes[0].legs[0].start_address;
+//    var cityEL = document.createElement('h1');
+//    console.log(location);
+//    locateContainer.innerHTML = "Your current Location: " + location;
+//    locateContainer.appendChild(cityEL);
+//  }
+};
 
+  //Weather Start
+  function weatherMaker(){
+  var apiKey = "c81ae0be75f519c71d1f855b95d48ec3"
+  var uvApi = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=" + apiKey;
+  var nameApi = "https://api.openweathermap.org/data/2.5/weather?&lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=" + apiKey;
+  fetch(nameApi)
+  .then(response => {
+    return response.json()})
+    .then(data => {
+      console.log(data)
+      var cityName = 'Your current City: ' + data.name;
+      var getCity = document.getElementById('cityName');
+      getCity.innerHTML = cityName;
+      
 
+      })
 
-// function initialize() {
-//   const fenway = { lat: 42.345573, lng: -71.098326 };
-//   const map = new google.maps.Map(document.getElementById("map"), {
-//     center: fenway,
-//     zoom: 14,
-//   });
-//   const panorama = new google.maps.StreetViewPanorama(
-//     document.getElementById("pano"),
-//     {
-//       position: fenway,
-//       pov: {
-//         heading: 34,
-//         pitch: 10,
-//       },
-//     }
-//   );
-//   map.setStreetView(panorama);
-// }
-
-function showPosition() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var positionInfo = "(" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
-      console.log(positionInfo);
-
-// start weather widget ------------------------------------------------------------------------------------------------------------------------------
-      var apiKey = "c81ae0be75f519c71d1f855b95d48ec3"
-      var uvApi = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&units=imperial&appid=" + apiKey;
-      fetch(uvApi).then(response => {
-          return response.json()
-  }).then(data => {
+  fetch(uvApi)
+  .then(response => {
+    return response.json()})
+    .then(data => {
       console.log(data) 
-      //current conditions 
+//current conditions 
       CurrentConditions.innerHTML = "<strong>Currently</strong>"
       uvIndex.innerHTML = "UV Index: " + data.current.uvi
       windSpeed.innerHTML = "Wind: " + data.current.wind_speed + " MPH"
@@ -147,26 +189,18 @@ function showPosition() {
       setImg.style.display = "initial"
       setImg.setAttribute("src", "https://openweathermap.org/img/w/" +  data.current.weather[0].icon + ".png")  
       console.log(data)
-
-      
-  })
-
-
-  setConditions()
-  function setConditions() {
-      fetch(uvApi).then(response => {
-          return response.json()
-  }).then(data => {
+    })
+    setConditions()
+    function setConditions() {
+    fetch(uvApi).then(response => {
+      return response.json()
+    }).then(data => {
+      console.log(data)
+      for(i = 0; i < 3; i++) {
+      //console.log(card)  
+      let x = 1 + i;
       console.log(data)
   
-      for(i = 0; i < 3; i++) {
-          
-          //console.log(card)  
-          let x = 1 + i;
-         
-      
-      console.log(data)
-      
       ///show.style.display = "initial"
       const card = document.getElementsByClassName('card')[i];
       const dt  = document.getElementsByClassName('date')[i];
@@ -176,13 +210,17 @@ function showPosition() {
       const Hum = document.getElementsByClassName('Humidity')[i];
       
       console.log(dt)
-      var d = moment() .format('LT')
+
+      var currentDate = new Date();
+      var d = moment(currentDate).format('LT');
+
+      //var d = moment().format('LT');
       
-      
+  
       d = d.split(":")
       dd = d[1].split(" ")
       ddd = Number(d[0]) + x
-         
+        
       var da = ddd  + " " + dd[1]
       d = da
       //d = da + d[2]
@@ -197,23 +235,22 @@ function showPosition() {
       Wnd.innerHTML = "Wind: " + data.hourly[i].wind_speed + " MPH"
       Hum.innerHTML = "Humidity: " + data.hourly[i].humidity + " %"
 
-      //console.log(Tmp)
+  //console.log(Tmp)
       card.appendChild(dt)
       card.appendChild(Wnd)
       card.appendChild(Tmp)
       card.appendChild(Hum)
       
       }
+
+})
   
-  })
-      
-  }
-  // end weather widget --------------------------------------------------------------------------------------------------------------------------
-
-    });
-  } 
 }
-
+  //document.getElementById('startlat').value = originLocation.lat;
+  //document.getElementById('startlng').value = originLocation.lng;
+  //document.getElementById('lat').value = clickedLocation.lat;
+  //document.getElementById('lng').value = clickedLocation.lng;
+  }
 
 
 

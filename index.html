@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#B9E0C4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#B9E0C4">
     <title>10Speed</title>
     <link
       rel="stylesheet"
@@ -28,29 +31,18 @@
         </div>
       </div>
     </section>
-
+    
     <section class="section">
-      <h1 class="title has-text-centered">Location</h1>
-      <button class="button is-primary" id="getLocation">Get Your Location</button>
-      <h2 class="subtitle has-text-centered" id="displayPosition">
-        
+      <h1 class="title has-text-centered">Instructions</h1>
+      <h2 class="subtitle has-text-centered">
+        After allowing your location to be accessed, select a single destination on the Map by clicking.   A bicycle-centric path will be mapped for you while providing a forecast for your destination.  Happy riding! 
       </h2>
+    </section>
+    <section class="section">
+      <h1 class="title has-text-centered" id="cityName"></h1>
       
-      <!-- <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">May 10Speed use your location?</p>
-            <button class="button is-success" id="yes-btn">
-              <i class="fas fa-check-circle"></i>
-            </button>
-            <button class="button is-danger" id="no-btn">
-              <i class="fas fa-ban"></i>
-            </button>
-          </header>
-        </div>
-      </div> -->
-      
+      <h2 class="subtitle has-text-centered" id="displayPosition">
+      </h2>
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Weather Forecast</h1>
@@ -104,9 +96,10 @@
     <section class="section">
       <h1 class="title has-text-centered">Mini-Map</h1>
       <h2 class="subtitle has-text-centered">
-        Select a location on the map to pin your destination.  When selecting, aim for a street or bicycle path (highlited in <span style="color: purple;"> purple</span>) for the best resultes.  
+        Select a location on the map to pin your destination.  When selecting, aim for a street or bicycle path (highlighted in <span style="color: purple;"> purple</span>) for the best results.  
       </h2>
       <div id="map"></div>
+      <div id="pano"></div>
       <div id="turns"></div>
       <div class="card">
         <header class="card-header">
@@ -121,22 +114,15 @@
       <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly" async></script>
     </section>
-    <section class="section">
-      <h1 class="title has-text-centered">Instructions</h1>
-      <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
-      </h2>
-    </section>
-
-    <script src="./assets/script.js"></script>
-
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
   
-    
+    <script src="./assets/moment.js"></script>
+    <script src="./assets/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!--<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly"
+     async
+    ></script> -->
   </body>
 </html>
 
@@ -147,9 +133,3 @@
 <!-- Photo Tags: <tag id="1234" author="12037949754@N01" raw="woo yay">wooyay</tag> -->
 <!-- This only for your photos? flickr.photos.getWithGeoData -->
 <!-- 41.4100° N, 81.8835° W RR metropark -->
-<!-- pixabay api key:22307283-f80c47e3ffcfb385f49e3498e -->
-<!-- get google maps api working first, from there figure out how to incorporate places/photos -->
-<!-- <div id=“map”></div>
-        <script
-        src=“https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly”
-        async></script> -->
