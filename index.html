@@ -5,34 +5,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>10Speed</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
-    <link rel="stylesheet" href="./assets/style/style.css"/>
-    <script src="./assets/js/script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
   <body>
-    <section class="hero is-success">
+    <section class="hero">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <h1 class="is-size-1 is-italic ">10Speed</h1>
+          <h1 class="is-size-1 is-italic">10Speed</h1>
           <figure class="image container is-128x128">
-            <img src="./assets/racing-296759.svg">
-        </figure>
+            <img src="./assets/racing-296759.svg" />
+          </figure>
         </div>
       </div>
     </section>
-    <section class="section ">
+
+    <section class="section">
       <h1 class="title has-text-centered">Location</h1>
-      <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
+      <button class="button is-primary" id="getLocation">Get Your Location</button>
+      <h2 class="subtitle has-text-centered" id="displayPosition">
+        
       </h2>
+      
+      <!-- <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">May 10Speed use your location?</p>
+            <button class="button is-success" id="yes-btn">
+              <i class="fas fa-check-circle"></i>
+            </button>
+            <button class="button is-danger" id="no-btn">
+              <i class="fas fa-ban"></i>
+            </button>
+          </header>
+        </div>
+      </div> -->
+      
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Weather Forecast</h1>
-      <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
-      </h2>
+      <div class="columns">
+
+        <div class="column is-full">
+            <div id = "curr">
+                <h2 id="CurrentConditions"></h2>
+                <img id="icon" src="" alt="weather icon"/>
+                <div id="Temperature"></div>
+                <div id="windSpeed"></div>
+                <div id="Humidity"></div>
+                <div id="uvIndex"></div>
+            </div>
+        </div>
+      </div>
+    <div class="columns">
+      
+        <div class="column is-one-third">
+          <div class="card" id="day">
+              <h5 class="date"></h5>
+              <img id="ic1" class="icon" src="" alt="weather icon"/>
+              <div class="Temperature"></div>
+              <div class="windSpeed"></div>
+              <div class="Humidity"></div>
+          </div>
+        </div>
+
+    <div class="column is-one-third">
+        <div class="card" id="day">
+            <h5 class="date"></h5>
+            <img id="ic2" class="icon" src="" alt="weather icon"/>
+            <div class="Temperature"></div>
+            <div class="windSpeed"></div>
+            <div class="Humidity"></div>
+        </div>
+    </div>
+
+    <div class="column is-one-third">
+        <div class="card" id="day">
+            <h5 class="date"></h5>
+            <img id="ic3" class="icon" src="" alt="weather icon"/>
+            <div class="Temperature"></div>
+            <div class="windSpeed"></div>
+            <div class="Humidity"></div>
+        </div>
+      
+    </div>
+
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Mini-Map</h1>
@@ -56,11 +123,18 @@
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Instructions</h1>
-      <h2 class="subtitle has-text-centered" id="turnByTurnInfo">
+      <h2 class="subtitle has-text-centered">
         A simple container to divide your page into <strong>sections</strong>,
         like the one you're currently reading.
       </h2>
     </section>
+
+    <script src="./assets/js/script.js"></script>
+
+    <!--<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly"
+     async
+    ></script> -->
   </body>
 </html>
 

@@ -1,3 +1,7 @@
+.hero {
+  background-color: rgb(185, 224, 196)
+}
+
 #map {
     height: 400px;
     width: 100%;
@@ -6,4 +10,51 @@
 #turn {
   height: 100px;
   width: 100%;
+}
+
+
+#getLocation {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hero {
+  background-color: rgb(185, 224, 196)
+}
+
+#icon {
+  display: none
+}
+
+#ic1 {
+  display: none;
+}
+
+#ic2 {
+  display: none;
+}
+
+#ic3 {
+  display: none;
+}
+
+#getLocation {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  
+}
+
+#curr {
+  padding: 25px;
+  font-size: 25px;
+  text-align: center;
+  
+}
+
+#day {
+  padding: 25px;
+  
+  text-align: center;
 }
