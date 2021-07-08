@@ -37,20 +37,26 @@
     <section class="section">
       <h1 class="title has-text-centered">Mini-Map</h1>
       <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
+        Select a location on the map to pin your destination.  When selecting, aim for a street or bicycle path (highlited in <span style="color: purple;"> purple</span>) for the best resultes.  
       </h2>
       <div id="map"></div>
-      <form method="post">
-        <input type="text" id="lat" readonly="yes"><br>
-        <input type="text" id="lng" readonly="yes">
-      </form>
+      <div id="turns"></div>
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Directions
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content has-text-link" id="turnByTurn">
+          </div>
+        </div>
       <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly" async></script>
     </section>
     <section class="section">
       <h1 class="title has-text-centered">Instructions</h1>
-      <h2 class="subtitle has-text-centered">
+      <h2 class="subtitle has-text-centered" id="turnByTurnInfo">
         A simple container to divide your page into <strong>sections</strong>,
         like the one you're currently reading.
       </h2>
