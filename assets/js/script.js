@@ -115,7 +115,11 @@ function markerLocation(mapMaker){
       const Hum = document.getElementsByClassName('Humidity')[i];
       
       console.log(dt)
-      var d = moment() .format('LT')
+
+      var currentDate = new Date();
+      var d = moment(currentDate).format('LT');
+
+      //var d = moment().format('LT');
       
   
       d = d.split(":")
