@@ -2,7 +2,35 @@ var latCords = 41.237
 var lngCords = -81.553
 var marker = false;
 var originLocation = { lat: latCords, lng: lngCords };
+var latitude = "";
+var longitude = "";
+function supports_geolocation() {
+  return !!navigator.geolocation;
+}
+function get_location() {
+  if ( supports_geolocation() ) {
+    navigator.geolocation.getCurrentPosition(show_Location, handle_error);
+  } else {
+    // no native support;
+	$("#msg").text('Your browser doesn\'t support geolocation!');
+  }
+}
+function show_Location(position) {
+  latitude = position.coords.latitude;
+	longitude = position.coords.longitude;
+  console.log(latitude);
+  console.log(longitude);
+};
+console.log(latitude);
+console.log(longitude);
 
+function handle_error(err) {
+  if (err.code == 1) {
+    // user said no!
+	$("#msg").text('You chose not to share your location.');
+  }
+}
+get_location();
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: originLocation,
@@ -14,11 +42,12 @@ function initMap() {
     markerLocation(map);
   });
 }
-
 function markerLocation(mapMaker){
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer({ map: mapMaker });
-  //directionsRenderer.setMap(mapMaker);
+  console.log(latitude);
+  console.log(longitude);
+  originLocation = { lat: latitude, lng: longitude };
   directionsService.route({
     origin: originLocation,
     destination: clickedLocation,
@@ -26,7 +55,6 @@ function markerLocation(mapMaker){
   },(response, status) => {
     console.log(response);
     console.log(status);}
-  
   ).then(function(Response){
     directionsRenderer.setDirections(Response);
     var turnsContainer = document.getElementById("turns");
@@ -37,8 +65,6 @@ function markerLocation(mapMaker){
     turnsContainer.innerHTML = "Distance: " + tripDistance + "<br/>" + "Duration: " +  tripDuration;
     turnsContainer.appendChild(turnsEL);
     steps = Response.routes[0].legs[0].steps;
-    //this.steps.forEach(i => console.log(steps[i].instructions));
-
     function turnByTurnSteps (steps) {
       var directions = document.getElementById('turnByTurn');
       directions.innerHTML = '';
@@ -47,9 +73,7 @@ function markerLocation(mapMaker){
         directions.innerHTML += '<br/><br/>' + steps[i].instructions + '<br/>' + steps[i].distance.text;
         }
       }
-     
       turnByTurnSteps (Response.routes[0].legs[0].steps);
-
   })};
 
   //document.getElementById('startlat').value = originLocation.lat;
