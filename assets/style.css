@@ -115,6 +115,9 @@ body {
   #intro-text {
       color: black;
       font-weight: bolder;
+      background-color:rgb(168, 162, 162) ;
+      opacity: 0.8;
+      border-radius: 10px;
   }
   #icon-img {
       font-weight: bolder;
@@ -148,7 +151,12 @@ body {
     color: black;
     font-weight: bolder;
  }
- #all-cards{
-     
+ #turns {
+    color: black;
+    font-weight: bolder;
+    background-color:rgb(168, 162, 162) ;
+      opacity: 0.8;
+      border-radius: 10px;
  }
+ 
  
