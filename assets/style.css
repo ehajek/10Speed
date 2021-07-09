@@ -1,6 +1,23 @@
+:root {
+    --primary-color: rgb(185, 224, 196)
+    
+}
+body {
+    background-image: url("../assets/bicycle-2540179_960_720.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    margin:auto;
+    
+
+}
 .hero {
     background-color: rgb(185, 224, 196)
   }
+
+#header{
+    color: black;
+    font-weight: bolder;
+}
   
   #map {
       height: 400px;
@@ -61,3 +78,77 @@
   #cityName {
     text-align: center;
   }
+
+  .hero-body {
+      background-image: url("./cycling-1533270_1920.jpg");
+      height: 600px;
+      background-size: cover;
+      background-position: left;
+      position: relative;
+      border: black 15px;
+  }
+  .title {
+      background-color:rgb(185, 224, 196) ;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 15px;
+  }
+  
+  #todayWeather {
+      background-color: rgb(168, 162, 162);
+      opacity: 0.8;
+  }
+  .column {
+      opacity: 1;
+  }
+  .card {
+      border-radius: 15px;
+      background-color: var(--primary-color) ;
+      opacity: 1;
+  }
+  .card-hearder-title {
+      border-radius: 15px;
+      opacity:0.8 ;
+  }
+
+  #intro-text {
+      color: black;
+      font-weight: bolder;
+  }
+  #icon-img {
+      font-weight: bolder;
+  }
+  #day {
+      color: black;
+      font-weight: bolder;
+  }
+  #current {
+      color:black;
+      font-weight: bolder;
+      text-align: center;
+  }
+ #CurrentConditions{
+     color: black;
+     font-weight: bolder;
+ }
+ #mini-direction{
+    color: black;
+    font-weight: bolder;
+    background-color:rgb(168, 162, 162) ;
+    opacity: 0.8;
+    border-radius: 10px;
+    
+ }
+ .subtitle {
+     color: var(--primary-color);
+     font-weight: bolder
+ }
+ #weather-head{
+    color: black;
+    font-weight: bolder;
+ }
+ #all-cards{
+     
+ }
+ 
