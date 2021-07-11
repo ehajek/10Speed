@@ -3,36 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#B9E0C4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#B9E0C4">
     <title>10Speed</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
-    <link rel="stylesheet" href="./assets/style.css"/>
-    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <section class="hero is-success">
+    <section class="hero">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <h1 class="is-size-1 is-italic ">10Speed</h1>
+          <h1 class="is-size-1 is-italic" id="header">10Speed</h1>
           <figure class="image container is-128x128">
-            <img src="./assets/racing-296759.svg">
-        </figure>
+            <img src="./assets/racing-296759.svg" id="icon-img"/>
+          </figure>
         </div>
       </div>
     </section>
-    <section class="section ">
-      <h1 class="title has-text-centered">Location</h1>
-      <h2 class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
+    
+    <section class="section">
+      <h1 class="title has-text-centered">Instructions</h1>
+      <h2 class="subtitle has-text-centered" id="intro-text">
+        After allowing your location to be accessed, select a single destination on the Map by clicking.   A bicycle-centric path will be mapped for you while providing a forecast for your destination.  Happy riding! 
       </h2>
     </section>
     <section class="section">
-      <h1 class="title has-text-centered">Weather Forecast</h1>
+      <h1 class="title has-text-centered" id="cityName"></h1>
+      
+      <h2 class="subtitle has-text-centered" id="displayPosition">
+      </h2>
+    </section>
+    <section class="section" id="todayWeather">
+      <h1 class="title has-text-centered" id="weather-head">Weather Forecast</h1>
       <div class="columns">
 
         <div class="column is-full">
-            <div id = "curr">
+            <div id = "current">
                 <h2 id="CurrentConditions"></h2>
                 <img id="icon" src="" alt="weather icon"/>
                 <div id="Temperature"></div>
@@ -42,7 +59,7 @@
             </div>
         </div>
       </div>
-    <div class="columns">
+    <div class="columns" id="all-cards">
       
         <div class="column is-one-third">
           <div class="card" id="day">
@@ -74,22 +91,45 @@
         </div>
       
     </div>
-
+    </div>
     </section>
     <section class="section">
-      <h1 class="title has-text-centered">Instructions</h1>
-      <h2 id="geolocation" class="subtitle has-text-centered">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
+      <h1 class="title has-text-centered">Mini-Map</h1>
+      <h2 class="subtitle has-text-centered" id="mini-direction">
+        Select a location on the map to pin your destination.  When selecting, aim for a street or bicycle path (highlighted in <span style="color: purple;"> purple</span>) for the best results.  
       </h2>
-      <button id="location-button" class="is-success" type="button" onclick="showPosition();">Get My Location</button>
-    </section>
-    <section class="section">
       <div id="map"></div>
+      <div id="pano"></div>
+      <div class="has-text-centered" id="turns"></div>
+      <div class="card has-text-centered">
+        <header class="card-header">
+          <p class="card-header-title has-text-centered" id="turn-directions">
+            Directions:
+          </p>
+        </header>
+        <div class="card-content has-text-centered">
+          <div class="content has-text-link" id="turnByTurn">
+          </div>
+        </div>
       <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly" async></script>
     </section>
+  
     <script src="./assets/moment.js"></script>
     <script src="./assets/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!--<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMPaAhaf8_zvCPm1QZUmi2_F7fyPJJuQ&callback=initMap&libraries=&v=weekly"
+     async
+    ></script> -->
   </body>
 </html>
+
+<!-- Flikr muse be in UTF-6 -->
+<!-- https://api.flickr.com/services -->
+<!-- Key:775907d1c1a5f5a2f6c25a27db8a567e -->
+<!-- Secret: f784a0d3cc9619b5 -->
+<!-- Photo Tags: <tag id="1234" author="12037949754@N01" raw="woo yay">wooyay</tag> -->
+<!-- This only for your photos? flickr.photos.getWithGeoData -->
+<!-- 41.4100° N, 81.8835° W RR metropark -->
