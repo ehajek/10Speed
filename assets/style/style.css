@@ -3,7 +3,7 @@
     
 }
 body {
-    background-image: url("../bicycle-2540179_960_720.jpg");
+    background-image: url("./assets/bicycle-2540179_960_720.jpg");
     background-attachment: fixed;
     background-size: cover;
     margin:auto;
@@ -80,7 +80,7 @@ body {
   }
 
   .hero-body {
-      background-image: url("../cycling-1533270_1920.jpg");
+      background-image: url("./assets/cycling-1533270_1920.jpg");
       height: 600px;
       background-size: cover;
       background-position: left;
