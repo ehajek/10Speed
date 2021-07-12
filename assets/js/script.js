@@ -21,7 +21,6 @@ function show_Location(position) {
 };
 console.log(latitude);
 console.log(longitude);
-
 function handle_error(err) {
   if (err.code == 1) {
     // user said no!
@@ -36,6 +35,17 @@ function initMap() {
     mapId: 'f195a7ab0618472c'
   });
   google.maps.event.addListener(map, 'click', function(event) {
+    // const panorama = new google.maps.StreetViewPanorama(
+    //   document.getElementById("pano"),
+    //   {
+    //     position: event.latLng,
+    //     pov: {
+    //       heading: 34,
+    //       pitch: 10,
+    //     },
+    //   }
+    // );
+    // map.setStreetView(panorama);
     clickedLocation = event.latLng;
     markerLocation(map);
   });
@@ -73,12 +83,30 @@ function markerLocation(mapMaker){
         }
       }
       turnByTurnSteps (Response.routes[0].legs[0].steps);
-  })};
-
+  })
+//  function yourCity(){
+//   var locateContainer = document.getElementById("getLocation").addEventListener("click");
+//    var location = Response.routes[0].legs[0].start_address;
+//    var cityEL = document.createElement('h1');
+//    console.log(location);
+//    locateContainer.innerHTML = "Your current Location: " + location;
+//    locateContainer.appendChild(cityEL);
+//  }
+};
   //Weather Start
   function weatherMaker(){
   var apiKey = "c81ae0be75f519c71d1f855b95d48ec3"
   var uvApi = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=" + apiKey;
+  var nameApi = "https://api.openweathermap.org/data/2.5/weather?&lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=" + apiKey;
+  fetch(nameApi)
+  .then(response => {
+    return response.json()})
+    .then(data => {
+      console.log(data)
+      var cityName = 'Your current City: ' + data.name;
+      var getCity = document.getElementById('cityName');
+      getCity.innerHTML = cityName;
+      })
   fetch(uvApi)
   .then(response => {
     return response.json()})
@@ -105,7 +133,6 @@ function markerLocation(mapMaker){
       //console.log(card)  
       let x = 1 + i;
       console.log(data)
-  
       ///show.style.display = "initial"
       const card = document.getElementsByClassName('card')[i];
       const dt  = document.getElementsByClassName('date')[i];
@@ -113,24 +140,17 @@ function markerLocation(mapMaker){
       const Tmp = document.getElementsByClassName('Temperature')[i];
       const Wnd = document.getElementsByClassName('windSpeed')[i];
       const Hum = document.getElementsByClassName('Humidity')[i];
-      
       console.log(dt)
-
       var currentDate = new Date();
       var d = moment(currentDate).format('LT');
-
       //var d = moment().format('LT');
-      
-  
       d = d.split(":")
       dd = d[1].split(" ")
       ddd = Number(d[0]) + x
-        
       var da = ddd  + " " + dd[1]
       d = da
       //d = da + d[2]
           console.log(x);
-      
           var str = "ic" + x
       var show = document.getElementById(str);
       show.style.display = "initial"
@@ -139,17 +159,13 @@ function markerLocation(mapMaker){
       Tmp.innerHTML = "Temp: " + data.hourly[i].temp + " ℉"; 
       Wnd.innerHTML = "Wind: " + data.hourly[i].wind_speed + " MPH"
       Hum.innerHTML = "Humidity: " + data.hourly[i].humidity + " %"
-
   //console.log(Tmp)
       card.appendChild(dt)
       card.appendChild(Wnd)
       card.appendChild(Tmp)
       card.appendChild(Hum)
-      
       }
-
 })
-  
 }
   //document.getElementById('startlat').value = originLocation.lat;
   //document.getElementById('startlng').value = originLocation.lng;
